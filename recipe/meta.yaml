@@ -1,3 +1,4 @@
+{% set python_min = '3.10' %}
 {% set name = "tico" %}
 {% set version = "0.0.1" %}
 
@@ -12,20 +13,22 @@ source:
 build:
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
-  number: 0
+  number: 1
 
 requirements:
   host:
-    - python >=3.10
+    - python {{ python_min }}
     - pip
     - versioneer
   run:
-    - python >=3.10
+    - python >={{ python_min }}
     - pytorch
     - networkx
     - smee-base
 
 test:
+  requires:
+    - python {{ python_min }}
   imports:
     - tico
 
